@@ -1,14 +1,4 @@
-from .basic import addition, subtraction, multiplication, division
-from .scientific import sqrt, power, sine, log, factorial, tangent
+from .basic import __all__ as basic_all
+from .scientific import __all__ as scientific_all
 
-__all__ = ["addition",
-           "subtraction",
-           "multiplication",
-           "division",
-           "sqrt",
-           "power",
-           "sine",
-           "log",
-           "factorial",
-           "tangent",
-           ]
+__all__ = basic_all + scientific_all

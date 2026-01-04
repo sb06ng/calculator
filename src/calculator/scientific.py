@@ -133,3 +133,13 @@ def tangent(angle, in_degrees=True):
         angle = math.radians(angle)
 
     return math.tan(angle)
+
+
+__all__ = [
+    sqrt.__name__,
+    power.__name__,
+    sine.__name__,
+    log.__name__,
+    factorial.__name__,
+    tangent.__name__,
+]

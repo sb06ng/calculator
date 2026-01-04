@@ -79,3 +79,11 @@ def division(a, b):
 
     if b == 0: raise ZeroDivisionError("division by zero")
     return a / b
+
+
+__all__ = [
+    addition.__name__,
+    subtraction.__name__,
+    multiplication.__name__,
+    division.__name__
+]
