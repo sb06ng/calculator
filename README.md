@@ -64,3 +64,62 @@ To run the package in development mode:
 1. Clone the repository.
 2. Install in editable mode: `pip install -e .`
 3. Run your scripts using absolute imports: `python -m calculator`
+
+---
+
+
+Here is a professional section to add to your **README.md**. It explains how the GUI works, how it uses the logic we
+built, and how to run it using the entry points defined in your `pyproject.toml`.
+
+---
+
+## 🖥️ Graphical User Interface (GUI)
+
+The package includes a built-in GUI built with **Tkinter**. It allows for both simple button-based math and complex
+expression parsing (e.g., typing `sqrt(25) + sin(90)` into a text field).
+
+### How it Works
+
+The GUI is separated into a **View** and **Logic** layer:
+
+* **`main_window.py`**: Handles the window, buttons, and user input.
+* **`logic.py`**: Uses Python's `ast` (Abstract Syntax Tree) module to safely parse text strings and map them to our
+  validated functions in `basic.py` and `scientific.py`.
+
+### Running the GUI
+
+If you installed the package via `pip install .`, you can launch the interface directly from your terminal:
+
+```bash
+calculator
+
+```
+
+Alternatively, you can run it as a module:
+
+```bash
+python -m calculator
+
+```
+
+### Supported Expression Syntax
+
+Because the GUI uses our `scientific` logic, you can type expressions using the following function aliases:
+
+| Text Function | Package Function      | Default Unit |
+|---------------|-----------------------|--------------|
+| `sin(x)`      | `calculate_sine`      | Degrees      |
+| `tan(x)`      | `calculate_tangent`   | Degrees      |
+| `sqrt(x)`     | `calculate_sqrt`      | N/A          |
+| `fac(x)`      | `calculate_factorial` | N/A          |
+| `log(x, b)`   | `calculate_log`       | Base         |
+
+---
+
+## 🔧 CLI vs GUI Mode
+
+The package's entry point is configured to detect how you want to use the tool. By default, it launches the GUI, but it
+can be used for automated testing via the command line.
+
+* **Launch GUI:** `calculator`
+* **Run CLI Tests:** `calculator --cli`

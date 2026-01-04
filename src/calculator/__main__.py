@@ -1,8 +1,11 @@
-from . import basic
-from . import scientific
+import argparse
+import tkinter as tk
+
+from . import basic, scientific
+from .gui.main_window import Calculator
 
 
-def main():
+def run_cli_tests():
     print("Testing basic calculations...")
     x, y = 100, 10
     print(f"x = {x}, y = {y}")
@@ -37,6 +40,21 @@ def main():
         print(f"Tan of 90: {scientific.calculate_tangent(90)}")
     except ValueError as e:
         print(f"Caught expected error: {e}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Calculator Package")
+
+    parser.add_argument("--cli", action="store_true", help="Run CLI tests instead of GUI")
+
+    args = parser.parse_args()
+
+    if args.cli:
+        run_cli_tests()
+    else:
+        root = tk.Tk()
+        calculator = Calculator(root)
+        root.mainloop()
 
 
 if __name__ == '__main__':
