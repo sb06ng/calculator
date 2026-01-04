@@ -1,89 +1,94 @@
-def addition(a, b):
+from .validator import _ensure_float
+
+
+def add(first_number: float, second_number: float) -> float:
     """
-    Add two numbers
+    Add two numbers and return a float result.
+
     Args:
-        a (int, float): First number
-        b (int, float) : Second number
+        first_number: The first number to add.
+        second_number: The second number to add.
 
     Returns:
-        number: Sum of two numbers
+        float: The sum of the two numbers.
 
     Raises:
-        TypeError: If 'a' or 'b' is not a number
+        TypeError: If inputs are booleans or not numbers.
     """
-    if not isinstance(a, (int, float)):
-        raise TypeError(f"Expected number for a, got {type(a).__name__}")
-    if not isinstance(b, (int, float)):
-        raise TypeError(f"Expected number for b, got {type(b).__name__}")
-    return a + b
+    try:
+        return _ensure_float(first_number) + _ensure_float(second_number)
+    except TypeError as error:
+        raise TypeError(f"Add failed: {error}")
 
 
-def subtraction(a, b):
+def subtract(first_number: float, second_number: float) -> float:
     """
-    Subtract two numbers
+    Subtract the second number from the first and return a float result.
+
     Args:
-        a (int, float): First number
-        b (int, float) : Second number
+        first_number: The number to be subtracted from.
+        second_number: The number to subtract.
 
     Returns:
-        number: Subtract two numbers
+        float: The difference as a float.
 
     Raises:
-        TypeError: If 'a' or 'b' is not a number
+        TypeError: If inputs are booleans or not numbers.
     """
-    if not isinstance(a, (int, float)):
-        raise TypeError(f"Expected number for a, got {type(a).__name__}")
-    if not isinstance(b, (int, float)):
-        raise TypeError(f"Expected number for b, got {type(b).__name__}")
-    return a - b
+    try:
+        return _ensure_float(first_number) - _ensure_float(second_number)
+    except TypeError as error:
+        raise TypeError(f"Subtract failed: {error}")
 
 
-def multiplication(a, b):
+def multiply(first_number: float, second_number: float) -> float:
     """
-    Multiply two numbers
+    Multiply two numbers and return a float result.
+
     Args:
-        a (int, float): First number
-        b (int, float) : Second number
+        first_number: The first factor.
+        second_number: The second factor.
 
     Returns:
-        number: Multiply two numbers
+        float: The product as a float.
 
     Raises:
-        TypeError: If 'a' or 'b' is not a number
+        TypeError: If inputs are booleans or not numbers.
     """
-    if not isinstance(a, (int, float)):
-        raise TypeError(f"Expected number for a, got {type(a).__name__}")
-    if not isinstance(b, (int, float)):
-        raise TypeError(f"Expected number for b, got {type(b).__name__}")
-    return a * b
+    try:
+        return _ensure_float(first_number) * _ensure_float(second_number)
+    except TypeError as error:
+        raise TypeError(f"Multiply failed: {error}")
 
 
-def division(a, b):
+def divide(first_number: float, second_number: float) -> float:
     """
-    Divide two numbers
+    Divide the first number by the second and return a float result.
+
     Args:
-        a (int, float): First number
-        b (int, float) : Second number
+        first_number: The dividend.
+        second_number: The divisor.
 
     Returns:
-        number: Divide two numbers
+        float: The quotient as a float.
 
     Raises:
-        TypeError: If 'a' or 'b' is not a number
-        ZeroDivisionError: If 'b' is zero
+        TypeError: If inputs are booleans or not numbers.
+        ZeroDivisionError: If the second_number is zero.
     """
-    if not isinstance(a, (int, float)):
-        raise TypeError(f"Expected number for a, got {type(a).__name__}")
-    if not isinstance(b, (int, float)):
-        raise TypeError(f"Expected number for b, got {type(b).__name__}")
-
-    if b == 0: raise ZeroDivisionError("division by zero")
-    return a / b
+    try:
+        num1 = _ensure_float(first_number)
+        num2 = _ensure_float(second_number)
+        return num1 / num2
+    except TypeError as error:
+        raise TypeError(f"Divide failed: {error}")
+    except ZeroDivisionError:
+        raise ZeroDivisionError("Divide failed: Division by zero is not allowed.")
 
 
 __all__ = [
-    addition.__name__,
-    subtraction.__name__,
-    multiplication.__name__,
-    division.__name__
+    add.__name__,
+    subtract.__name__,
+    multiply.__name__,
+    divide.__name__
 ]

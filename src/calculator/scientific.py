@@ -1,145 +1,178 @@
 import math
 
+from .validator import _ensure_float, AngleUnit
 
-def sqrt(a):
+DEFAULT_LOG_BASE = 2
+
+
+def calculate_sqrt(number: float) -> float:
     """
-    Calculates the square root of a number.
+    Calculate the square root of a number.
 
     Args:
-        a (int, float): The number to process.
+        number: The number to process.
 
     Returns:
         float: The square root of the number.
 
     Raises:
-        ValueError: If 'a' is a negative number.
-        TypeError: If 'a' is not a numeric type.
+        ValueError: If the number is negative.
+        TypeError: If the input is not a number or is a boolean.
     """
-    if not isinstance(a, (int, float)):
-        raise TypeError(f"Expected number, got {type(a).__name__}")
-    if a < 0:
-        raise ValueError("Cannot calculate square root of a negative number.")
-    return math.sqrt(a)
+    try:
+        val = _ensure_float(number)
+        if val < 0:
+            raise ValueError("Cannot calculate square root of a negative number.")
+        return math.sqrt(val)
+    except (TypeError, ValueError) as error:
+        raise type(error)(f"Sqrt failed: {error}")
 
 
-def power(base, exponent):
+def calculate_power(base: float, exponent: float) -> float:
     """
-    Raises a base to a specific power.
+    Raise a base to a specific power.
 
     Args:
-        base (int, float): The number to be multiplied.
-        exponent (int, float): The power to raise the base to.
+        base: The base number.
+        exponent: The power to raise the base to.
 
     Returns:
-        float: The result of base**exponent.
+        float: The result of base raised to the exponent.
+
     Raises:
-        TypeError: If 'base' or 'exponent' is not a numeric type.
+        TypeError: If base or exponent are not numbers.
     """
-    if not isinstance(base, (int, float)):
-        raise TypeError(f"Expected number for base, got {type(base).__name__}")
-    if not isinstance(exponent, (int, float)):
-        raise TypeError(f"Expected number for exponent, got {type(exponent).__name__}")
-    return math.pow(base, exponent)
+    try:
+        return math.pow(_ensure_float(base), _ensure_float(exponent))
+    except TypeError as error:
+        raise TypeError(f"Power failed: {error}")
 
 
-def sine(angle, in_degrees=True):
+def calculate_sine(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
     """
-    Calculates the sine of an angle.
+    Calculate the sine of an angle.
 
     Args:
-        angle (int, float): The angle to calculate.
-        in_degrees (bool): If True, treats angle as degrees. If False, as radians.
-            Defaults to True.
+        angle: The numeric value of the angle.
+        unit: The unit of the angle (AngleUnit.DEG or AngleUnit.RAD).
 
     Returns:
         float: The sine of the angle.
 
     Raises:
-        TypeError: If 'angle' is not a numeric type.
+        TypeError: If angle is not a number.
+        ValueError: If unit is not valid.
     """
-    if not isinstance(angle, (int, float)):
-        raise TypeError(f"Expected number, got {type(angle).__name__}")
-    if in_degrees:
-        angle = math.radians(angle)
-    return math.sin(angle)
+    try:
+        angle_val = _ensure_float(angle)
+
+        if unit == AngleUnit.DEG:
+            angle_val = math.radians(angle_val)
+        elif unit == AngleUnit.RAD:
+            pass
+        else:
+            raise ValueError(f"Invalid unit. Use {AngleUnit.DEG} or {AngleUnit.RAD}")
+
+        return math.sin(angle_val)
+    except (TypeError, ValueError) as error:
+        raise type(error)(f"Sine failed: {error}")
 
 
-def log(x, base=math.e):
+def calculate_log(number: float, base: float = DEFAULT_LOG_BASE) -> float:
     """
-    Calculates the logarithm of x to the given base.
+    Calculate the logarithm of a number to a given base.
 
     Args:
-        x (int, float): The number to find the logarithm of.
-        base (int, float, optional): The logarithmic base. Defaults to e (natural log).
+        number: The value to find the logarithm of.
+        base: The logarithmic base.
 
     Returns:
-        float: The logarithm of x.
+        float: The logarithm of the number.
 
     Raises:
-        ValueError: If x is less than or equal to 0.
-        TypeError: If x or base is not a numeric type.
+        ValueError: If number <= 0 or base <= 0 or base == 1.
+        TypeError: If number or base are not numbers.
     """
-    if not isinstance(x, (int, float)):
-        raise TypeError(f"Expected number, got {type(x).__name__}")
-    if not isinstance(base, (int, float)):
-        raise TypeError(f"Expected number, got {type(base).__name__}")
-    if x <= 0:
-        raise ValueError("Logarithm undefined for values <= 0.")
-    return math.log(x, base)
+    try:
+        val = _ensure_float(number)
+        base_val = _ensure_float(base)
+
+        if val <= 0:
+            raise ValueError("Logarithm number must be > 0.")
+        if base_val <= 0 or base_val == 1:
+            raise ValueError("Logarithm base must be > 0 and not equal to 1.")
+
+        return math.log(val, base_val)
+    except (TypeError, ValueError) as error:
+        raise type(error)(f"Log failed: {error}")
 
 
-def factorial(n):
+def calculate_factorial(number: int) -> int:
     """
-    Calculates the factorial of a non-negative integer.
+    Calculate the factorial of a non-negative integer.
 
     Args:
-        n (int): The number to calculate.
+        number: The whole integer to calculate.
 
     Returns:
-        int: The factorial of n.
+        int: The factorial result.
 
     Raises:
-        ValueError: If n is negative.
-        TypeError: If n is not an integer.
+        TypeError: If input is not a whole integer or is a boolean.
+        ValueError: If number is negative.
     """
-    if not isinstance(n, int):
-        raise TypeError("Factorial requires an integer.")
-    if n < 0:
-        raise ValueError("Factorial is not defined for negative numbers.")
-    return math.factorial(n)
+    try:
+        if isinstance(number, bool) or not isinstance(number, int):
+            raise TypeError("Factorial requires a whole integer.")
+
+        if number < 0:
+            raise ValueError("Factorial is not defined for negative numbers.")
+
+        return math.factorial(number)
+    except (TypeError, ValueError) as error:
+        raise type(error)(f"Factorial failed: {error}")
 
 
-def tangent(angle, in_degrees=True):
+def calculate_tangent(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
     """
-    Calculates the tangent of an angle.
+    Calculate the tangent of an angle.
 
     Args:
-        angle (int, float): The angle to calculate.
-        in_degrees (bool): If True, treats angle as degrees. Defaults to True.
+        angle: The numeric value of the angle.
+        unit: The unit of the angle (AngleUnit.DEG or AngleUnit.RAD).
 
     Returns:
         float: The tangent of the angle.
 
     Raises:
-        ValueError: If the angle is at a point where tangent is undefined (e.g., 90°).
-        TypeError: If angle is not a numeric type.
+        ValueError: If the tangent is undefined at the given angle.
+        TypeError: If angle is not a number.
     """
-    if not isinstance(angle, (int, float)):
-        raise TypeError(f"Expected number, got {type(angle).__name__}")
-    if in_degrees:
-        # Check for undefined points in degrees (90, 270, etc.)
-        if (angle - 90) % 180 == 0:
-            raise ValueError(f"Tangent is undefined for {angle} degrees.")
-        angle = math.radians(angle)
+    try:
+        angle_val = _ensure_float(angle)
 
-    return math.tan(angle)
+        if unit == AngleUnit.DEG:
+            if (angle_val - 90) % 180 == 0:
+                raise ValueError(f"Tangent is undefined for {angle_val} degrees.")
+            angle_val = math.radians(angle_val)
+        elif unit == AngleUnit.RAD:
+            # Undefined check for radians: tan(x) is undefined at (pi/2) + k*pi
+            # Check if the value is very close to (pi/2) to catch math errors
+            if (angle_val - (math.pi / 2)) % math.pi == 0:
+                raise ValueError(f"Tangent is undefined for {angle_val} radians.")
+        else:
+            raise ValueError(f"Invalid unit. Use {AngleUnit.DEG} or {AngleUnit.RAD}")
+
+        return math.tan(angle_val)
+    except (TypeError, ValueError) as error:
+        raise type(error)(f"Tangent failed: {error}")
 
 
 __all__ = [
-    sqrt.__name__,
-    power.__name__,
-    sine.__name__,
-    log.__name__,
-    factorial.__name__,
-    tangent.__name__,
+    calculate_sqrt.__name__,
+    calculate_power.__name__,
+    calculate_sine.__name__,
+    calculate_log.__name__,
+    calculate_factorial.__name__,
+    calculate_tangent.__name__,
 ]
