@@ -1,82 +1,76 @@
-# Calculator Package
+To create a professional README for your calculator package, we need to balance clear instructions with examples of the
+new "Standard" we've built (the Enums, the error handling, and the clean API).
 
-A modular Python calculator engine providing basic and scientific calculation capabilities. This package is designed to
-be used as a standalone CLI tool or as a library for external GUIs.
-
-## 🚀 Features
-
-* **Basic Operations:** Addition, Subtraction, Multiplication, Division.
-* **Scientific Suite:** Square root, Trigonometry (Sine, Tangent), Factorials, and Logarithms.
-* **Error Handling:** Robust handling for division by zero and invalid mathematical domains.
+Since your `pyproject.toml` indicates a `src` layout and a console script, I have included instructions for both
+developers and end-users.
 
 ---
 
-## 🛠️ Installation for Developers
+## 🚀 Installation
 
-If you want to clone this repository and install it locally to use in your own projects , follow these
-steps:
-
-### 1. Clone the Repository
+Clone the repo to your local environment
 
 ```bash
-git clone https://github.com/yourusername/calculator.git
+git clone https://github.com/sb06ng/calculator
+```
+
+Move to the root directory
+
+```bash
 cd calculator
-
 ```
 
-### 2. Install the Package Locally
-
-You can install the package in **editable mode**. This means any changes you make to the code will immediately reflect
-in your project without needing to reinstall.
+From the root directory (where `pyproject.toml` is located):
 
 ```bash
-pip install -e .
+pip install .
 ```
 
 ---
 
-## 💻 Usage
+## 🛠 Usage
 
-### As a Command Line Tool
+### Basic Arithmetic
 
-Once installed, you can run the calculator directly from your terminal:
-
-```bash
-calculator
-
-```
-
-### As a Module in your code
-
-To use this engine in an external GUI project, simply import the modules:
+The `basic` module provides standard operations. Note that all results are returned as `float`.
 
 ```python
-from src.calculator import basic, scientific
+from calculator.basic import add, divide
 
-result = basic.addition(10, 5)
-print(f"Result: {result}")
+# Simple addition
+print(add(10, 5))  # Output: 15.0
+
+# Division with error handling
+try:
+    result = divide(10, 0)
+except ZeroDivisionError as e:
+    print(e)  # Output: Divide failed: Division by zero is not allowed.
+
+```
+
+### Scientific Calculations
+
+The `scientific` module handles advanced math. For trigonometric functions, use the `AngleUnit` Enum.
+
+```python
+from calculator.scientific import calculate_sine, calculate_log
+from calculator.validator import AngleUnit
+
+# Sine using Degrees (Default)
+print(calculate_sine(90, unit=AngleUnit.DEG))  # Output: 1.0
+
+# Natural Log (Default base is e)
+print(calculate_log(10))
+
+# Log with custom base
+print(calculate_log(100, base=10))  # Output: 2.0
 
 ```
 
----
+## 🧪 Development & Testing
 
-## 📦 Building the Wheel
+To run the package in development mode:
 
-To generate a `.whl` distribution file for production:
-
-1. Install the build tool: `pip install build`
-2. Run the build: `python -m build`
-3. Find your file in the `dist/` folder.
-
----
-
-## 🧪 Testing
-
-To test the module logic without installing:
-
-```bash
-# Move to the root directory
-cd ..
-python -m calculator
-
-```
+1. Clone the repository.
+2. Install in editable mode: `pip install -e .`
+3. Run your scripts using absolute imports: `python -m calculator`
