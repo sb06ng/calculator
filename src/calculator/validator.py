@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Any
 
 
 class AngleUnit(str, Enum):
@@ -10,7 +11,7 @@ class AngleUnit(str, Enum):
     RAD = "rad"
 
 
-def _ensure_float(value) -> float:
+def ensure_float(value: Any) -> float:
     """
     Convert input to float
 
@@ -24,7 +25,7 @@ def _ensure_float(value) -> float:
         TypeError: If the value is a boolean or not convertible to float.
     """
     if isinstance(value, bool):  # Explicitly block bools because float(True) returns 1.0 without error
-        raise TypeError
+        raise TypeError("Expected number, got bool")
     try:
         return float(value)
     except (TypeError, ValueError):

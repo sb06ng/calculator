@@ -1,6 +1,6 @@
 import math
 
-from .validator import _ensure_float, AngleUnit
+from .validator import ensure_float, AngleUnit
 
 DEFAULT_LOG_BASE = 2
 
@@ -20,7 +20,7 @@ def calculate_sqrt(number: float) -> float:
         TypeError: If the input is not a number or is a boolean.
     """
     try:
-        val = _ensure_float(number)
+        val = ensure_float(number)
         if val < 0:
             raise ValueError("Cannot calculate square root of a negative number.")
         return math.sqrt(val)
@@ -43,7 +43,7 @@ def calculate_power(base: float, exponent: float) -> float:
         TypeError: If base or exponent are not numbers.
     """
     try:
-        return math.pow(_ensure_float(base), _ensure_float(exponent))
+        return math.pow(ensure_float(base), ensure_float(exponent))
     except TypeError as error:
         raise TypeError(f"Power failed: {error}")
 
@@ -64,7 +64,7 @@ def calculate_sine(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
         ValueError: If unit is not valid.
     """
     try:
-        angle_val = _ensure_float(angle)
+        angle_val = ensure_float(angle)
 
         if unit == AngleUnit.DEG:
             angle_val = math.radians(angle_val)
@@ -94,8 +94,8 @@ def calculate_log(number: float, base: float = DEFAULT_LOG_BASE) -> float:
         TypeError: If number or base are not numbers.
     """
     try:
-        val = _ensure_float(number)
-        base_val = _ensure_float(base)
+        val = ensure_float(number)
+        base_val = ensure_float(base)
 
         if val <= 0:
             raise ValueError("Logarithm number must be > 0.")
@@ -149,7 +149,7 @@ def calculate_tangent(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
         TypeError: If angle is not a number.
     """
     try:
-        angle_val = _ensure_float(angle)
+        angle_val = ensure_float(angle)
 
         if unit == AngleUnit.DEG:
             if (angle_val - 90) % 180 == 0:

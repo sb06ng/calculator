@@ -1,4 +1,4 @@
-from .validator import _ensure_float
+from .validator import ensure_float
 
 
 def add(first_number: float, second_number: float) -> float:
@@ -16,7 +16,7 @@ def add(first_number: float, second_number: float) -> float:
         TypeError: If inputs are booleans or not numbers.
     """
     try:
-        return _ensure_float(first_number) + _ensure_float(second_number)
+        return ensure_float(first_number) + ensure_float(second_number)
     except TypeError as error:
         raise TypeError(f"Add failed: {error}")
 
@@ -36,7 +36,7 @@ def subtract(first_number: float, second_number: float) -> float:
         TypeError: If inputs are booleans or not numbers.
     """
     try:
-        return _ensure_float(first_number) - _ensure_float(second_number)
+        return ensure_float(first_number) - ensure_float(second_number)
     except TypeError as error:
         raise TypeError(f"Subtract failed: {error}")
 
@@ -56,7 +56,7 @@ def multiply(first_number: float, second_number: float) -> float:
         TypeError: If inputs are booleans or not numbers.
     """
     try:
-        return _ensure_float(first_number) * _ensure_float(second_number)
+        return ensure_float(first_number) * ensure_float(second_number)
     except TypeError as error:
         raise TypeError(f"Multiply failed: {error}")
 
@@ -77,8 +77,8 @@ def divide(first_number: float, second_number: float) -> float:
         ZeroDivisionError: If the second_number is zero.
     """
     try:
-        num1 = _ensure_float(first_number)
-        num2 = _ensure_float(second_number)
+        num1 = ensure_float(first_number)
+        num2 = ensure_float(second_number)
         return num1 / num2
     except TypeError as error:
         raise TypeError(f"Divide failed: {error}")
