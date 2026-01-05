@@ -18,7 +18,7 @@ def add(first_number: float, second_number: float) -> float:
     try:
         return ensure_float(first_number) + ensure_float(second_number)
     except TypeError as error:
-        raise TypeError(f"Add failed: {error}")
+        raise TypeError(f"Add failed: {error}") from error
 
 
 def subtract(first_number: float, second_number: float) -> float:
@@ -38,7 +38,7 @@ def subtract(first_number: float, second_number: float) -> float:
     try:
         return ensure_float(first_number) - ensure_float(second_number)
     except TypeError as error:
-        raise TypeError(f"Subtract failed: {error}")
+        raise TypeError(f"Subtract failed: {error}") from error
 
 
 def multiply(first_number: float, second_number: float) -> float:
@@ -58,7 +58,7 @@ def multiply(first_number: float, second_number: float) -> float:
     try:
         return ensure_float(first_number) * ensure_float(second_number)
     except TypeError as error:
-        raise TypeError(f"Multiply failed: {error}")
+        raise TypeError(f"Multiply failed: {error}") from error
 
 
 def divide(first_number: float, second_number: float) -> float:
@@ -81,7 +81,7 @@ def divide(first_number: float, second_number: float) -> float:
         num2 = ensure_float(second_number)
         return num1 / num2
     except TypeError as error:
-        raise TypeError(f"Divide failed: {error}")
+        raise TypeError(f"Divide failed: {error}") from error
     except ZeroDivisionError:
         raise ZeroDivisionError("Divide failed: Division by zero is not allowed.")
 

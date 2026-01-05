@@ -25,7 +25,7 @@ def calculate_sqrt(number: float) -> float:
             raise ValueError("Cannot calculate square root of a negative number.")
         return math.sqrt(val)
     except (TypeError, ValueError) as error:
-        raise type(error)(f"Sqrt failed: {error}")
+        raise type(error)(f"Sqrt failed: {error}") from error
 
 
 def calculate_power(base: float, exponent: float) -> float:
@@ -45,7 +45,7 @@ def calculate_power(base: float, exponent: float) -> float:
     try:
         return math.pow(ensure_float(base), ensure_float(exponent))
     except TypeError as error:
-        raise TypeError(f"Power failed: {error}")
+        raise TypeError(f"Power failed: {error}") from error
 
 
 def calculate_sine(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
@@ -75,7 +75,7 @@ def calculate_sine(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
 
         return math.sin(angle_val)
     except (TypeError, ValueError) as error:
-        raise type(error)(f"Sine failed: {error}")
+        raise type(error)(f"Sine failed: {error}") from error
 
 
 def calculate_log(number: float, base: float = DEFAULT_LOG_BASE) -> float:
@@ -104,7 +104,7 @@ def calculate_log(number: float, base: float = DEFAULT_LOG_BASE) -> float:
 
         return math.log(val, base_val)
     except (TypeError, ValueError) as error:
-        raise type(error)(f"Log failed: {error}")
+        raise type(error)(f"Log failed: {error}") from error
 
 
 def calculate_factorial(number: int) -> int:
@@ -130,7 +130,7 @@ def calculate_factorial(number: int) -> int:
 
         return math.factorial(number)
     except (TypeError, ValueError) as error:
-        raise type(error)(f"Factorial failed: {error}")
+        raise type(error)(f"Factorial failed: {error}") from error
 
 
 def calculate_tangent(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
@@ -165,7 +165,7 @@ def calculate_tangent(angle: float, unit: AngleUnit = AngleUnit.DEG) -> float:
 
         return math.tan(angle_val)
     except (TypeError, ValueError) as error:
-        raise type(error)(f"Tangent failed: {error}")
+        raise type(error)(f"Tangent failed: {error}") from error
 
 
 __all__ = [
