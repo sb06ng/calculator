@@ -1,11 +1,3 @@
-To create a professional README for your calculator package, we need to balance clear instructions with examples of the
-new "Standard" we've built (the Enums, the error handling, and the clean API).
-
-Since your `pyproject.toml` indicates a `src` layout and a console script, I have included instructions for both
-developers and end-users.
-
----
-
 ## 🚀 Installation
 
 Clone the repo to your local environment
@@ -45,7 +37,6 @@ try:
     result = divide(10, 0)
 except ZeroDivisionError as e:
     print(e)  # Output: Divide failed: Division by zero is not allowed.
-
 ```
 
 ### Scientific Calculations
@@ -64,7 +55,6 @@ print(calculate_log(10))
 
 # Log with custom base
 print(calculate_log(100, base=10))  # Output: 2.0
-
 ```
 
 ## 🧪 Development & Testing
