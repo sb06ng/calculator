@@ -61,6 +61,7 @@ def calculate(equation: str):
     """
     try:
         tree = ast.parse(equation, mode="eval")
+        print(tree)
         return evaluate_node(tree.body)
     except Exception as e:
         raise ValueError(f"Invalid Expression: {e}")
