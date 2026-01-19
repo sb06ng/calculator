@@ -45,7 +45,9 @@ def run_cli_tests():
 def main():
     parser = argparse.ArgumentParser(description="Calculator Package")
 
-    parser.add_argument("--cli", action="store_true", help="Run CLI tests instead of GUI")
+    parser.add_argument(
+        "--cli", action="store_true", help="Run CLI tests instead of GUI"
+    )
 
     args = parser.parse_args()
 
@@ -53,9 +55,9 @@ def main():
         run_cli_tests()
     else:
         root = tk.Tk()
-        calculator = Calculator(root)
+        Calculator(root)
         root.mainloop()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

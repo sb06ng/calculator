@@ -86,9 +86,4 @@ def divide(first_number: float, second_number: float) -> float:
         raise ZeroDivisionError("Divide failed: Division by zero is not allowed.")
 
 
-__all__ = [
-    add.__name__,
-    subtract.__name__,
-    multiply.__name__,
-    divide.__name__
-]
+__all__ = [add.__name__, subtract.__name__, multiply.__name__, divide.__name__]
