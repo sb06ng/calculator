@@ -7,6 +7,7 @@ class AngleUnit(str, Enum):
     Units for angular calculations.
     Using str inheritance allows for easy comparison and serialization.
     """
+
     DEG = "deg"
     RAD = "rad"
 
@@ -24,7 +25,9 @@ def ensure_float(value: Any) -> float:
     Raises:
         TypeError: If the value is a boolean or not convertible to float.
     """
-    if isinstance(value, bool):  # Explicitly block bools because float(True) returns 1.0 without error
+    if isinstance(
+        value, bool
+    ):  # Explicitly block bools because float(True) returns 1.0 without error
         raise TypeError("Expected number, got bool")
     try:
         return float(value)

@@ -16,12 +16,12 @@ operators = {
 # Maps string function names to our refactored scientific logic
 # Note: Since sine/tangent now require an AngleUnit, we use a lambda or partial
 functions = {
-    'sin': lambda x: scientific.calculate_sine(x, unit=AngleUnit.DEG),
-    'tan': lambda x: scientific.calculate_tangent(x, unit=AngleUnit.DEG),
-    'sqrt': scientific.calculate_sqrt,
-    'log': scientific.calculate_log,
-    'fac': scientific.calculate_factorial,
-    'pow': scientific.calculate_power
+    "sin": lambda x: scientific.calculate_sine(x, unit=AngleUnit.DEG),
+    "tan": lambda x: scientific.calculate_tangent(x, unit=AngleUnit.DEG),
+    "sqrt": scientific.calculate_sqrt,
+    "log": scientific.calculate_log,
+    "fac": scientific.calculate_factorial,
+    "pow": scientific.calculate_power,
 }
 
 

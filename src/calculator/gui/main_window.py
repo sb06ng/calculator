@@ -1,4 +1,5 @@
 import tkinter as tk
+from functools import partial
 
 from .logic import calculate
 
@@ -9,27 +10,23 @@ PADDING = 2
 
 FONT = ("Arial", 14)
 EQUATION_FONT = ("Arial", 20)
-COLORS = {
-    "bg": "#f0f0f0",
-    "calc_bg": "#0000ff",
-    "entry_bg": "white"
-}
+COLORS = {"bg": "#f0f0f0", "calc_bg": "#0000ff", "entry_bg": "white"}
 BUTTON_COLORS = {
     "number": "#ffffff",
     "main_operator": "#ff9500",
     "clear": "#ff1111",
-    "function": "#ffcc00"
+    "function": "#ffcc00",
 }
 
-FUNCTIONS = ['sin', 'tan', 'sqrt', 'fac', 'pow']
-BACKSPACE_SYM = "\u232B"
+FUNCTIONS = ["sin", "tan", "sqrt", "fac", "pow"]
+BACKSPACE_SYM = "\u232b"
 
 BUTTONS_LAYOUT = [
-    [FUNCTIONS[0], 'C', BACKSPACE_SYM, '(', ')'],
-    [FUNCTIONS[1], '7', '8', '9', '/'],
-    [FUNCTIONS[2], '4', '5', '6', '*'],
-    [FUNCTIONS[3], '1', '2', '3', '-'],
-    [FUNCTIONS[4], '0', '.', '=', '+']
+    [FUNCTIONS[0], "C", BACKSPACE_SYM, "(", ")"],
+    [FUNCTIONS[1], "7", "8", "9", "/"],
+    [FUNCTIONS[2], "4", "5", "6", "*"],
+    [FUNCTIONS[3], "1", "2", "3", "-"],
+    [FUNCTIONS[4], "0", ".", "=", "+"],
 ]
 
 
@@ -45,9 +42,9 @@ class Calculator:
         self.root.configure(background=COLORS["bg"])
 
         # self.root.bind('<Key>', self.handle_keypress)
-        self.root.bind('<Return>', lambda e: self.process_calculation())
-        self.root.bind('<BackSpace>', lambda e: self.on_button_click("<-"))
-        self.root.bind('<Escape>', lambda e: self.on_button_click("C"))
+        self.root.bind("<Return>", lambda e: self.process_calculation())
+        self.root.bind("<BackSpace>", lambda e: self.on_button_click("<-"))
+        self.root.bind("<Escape>", lambda e: self.on_button_click("C"))
 
         # create the area where the equation exist
         self.equation = tk.StringVar()
@@ -107,7 +104,7 @@ class Calculator:
             font=FONT,
             relief="flat",
             activebackground="#cccccc",
-            command=lambda t=text: self.on_button_click(t)
+            command=partial(self.on_button_click, text),
         )
         btn.grid(row=row, column=column, sticky="nsew", padx=PADDING, pady=PADDING)
 
@@ -144,7 +141,7 @@ class Calculator:
                 func_pattern = func + "("
                 if current_text.endswith(func_pattern):
                     # Remove the entire length of 'func('
-                    new_text = current_text[:-len(func_pattern)]
+                    new_text = current_text[: -len(func_pattern)]
                     self.equation.set(new_text)
                     deleted = True
                     break
